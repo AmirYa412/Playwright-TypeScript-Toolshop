@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ES2022",
+    "moduleResolution": "bundler",
+    "lib": ["ES2022", "DOM"],
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "@api/*": ["api/*"],
+      "@components/*": ["components/*"],
+      "@common-actions/*": ["common-actions/*"],
+      "@environments/*": ["environments/*"],
+      "@factories/*": ["factories/*"],
+      "@fixtures/*": ["fixtures/*"],
+      "@helpers/*": ["helpers/*"],
+      "@pages/*": ["pages/*"],
+      "@support/*": ["support/*"],
+      "@app-types/*": ["types/*"]
+    }
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules", "reports"]
+}
