@@ -5,7 +5,7 @@ import type { UserKey } from '@app-types/env.types';
 import { UsersClient } from '@api/users/users.client';
 import { BrandsClient } from '@api/brands/brands.client';
 import { CategoriesClient } from '@api/categories/categories.client';
-import { getToken } from '@support/token-cache';
+import { getToken } from '@common-actions/auth/token-cache';
 
 type ClientCtor<T> = new (request: APIRequestContext, authState: AuthState) => T;
 
