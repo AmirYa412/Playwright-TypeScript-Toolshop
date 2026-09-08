@@ -23,7 +23,6 @@
       "@fixtures/*": ["fixtures/*"],
       "@helpers/*": ["helpers/*"],
       "@pages/*": ["pages/*"],
-      "@support/*": ["support/*"],
       "@app-types/*": ["types/*"]
     }
   },

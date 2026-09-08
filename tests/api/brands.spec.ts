@@ -4,7 +4,7 @@ import { BrandListSchema } from '@app-types/brand.types';
 
 test.describe('Brands API', { tag: '@api' }, () => {
   test('GET /brands matches the expected schema and includes the known ForgeFlex brand', async ({ api, env }) => {
-    const brands = await api.brands.list();
+    const brands = await api.brands.getBrands();
 
     expectSchema(BrandListSchema, brands);
 

@@ -1,7 +1,7 @@
 import type { Locator, Page } from '@playwright/test';
 import { BasePage } from './base.page';
 import { HeaderComponent } from '@components/header.component';
-import { loginViaUi } from '@common-actions/auth.actions';
+import { loginViaUi } from '@common-actions/auth/auth.actions';
 import type { Environment } from '@environments/index';
 import type { UserKey } from '@app-types/env.types';
 

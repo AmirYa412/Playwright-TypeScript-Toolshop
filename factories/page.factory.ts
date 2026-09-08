@@ -5,7 +5,7 @@ import type { UserKey } from '@app-types/env.types';
 import { HomePage } from '@pages/home.page';
 import { LoginPage } from '@pages/login.page';
 import { CategoryPage } from '@pages/category.page';
-import { loginViaApi, seedUiSession } from '@common-actions/auth.actions';
+import { loginViaApi, seedUiSession } from '@common-actions/auth/auth.actions';
 
 type PageCtor<T> = new (page: Page, env: Environment) => T;
 

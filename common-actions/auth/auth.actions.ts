@@ -2,7 +2,7 @@ import type { APIRequestContext, Page } from '@playwright/test';
 import type { Environment } from '@environments/index';
 import type { UserKey } from '@app-types/env.types';
 import type { LoginPage } from '@pages/login.page';
-import { getToken } from '@support/token-cache';
+import { getToken } from '@common-actions/auth/token-cache';
 
 /** Cross-cutting auth flows spanning the API and UI layers -- what the page/api factories delegate to. */
 

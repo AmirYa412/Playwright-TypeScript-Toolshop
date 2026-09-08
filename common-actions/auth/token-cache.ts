@@ -24,7 +24,7 @@ export async function getToken(request: APIRequestContext, apiUrl: string, crede
 
   const login = (async () => {
     const client = new UsersClient(request, {});
-    const { access_token } = await client.login(credentials);
+    const { access_token } = await client.postUsersLogin(credentials);
     tokens.set(key, access_token);
     return access_token;
   })();
