@@ -15,13 +15,25 @@ export interface UiFixtures {
 /** Test object for UI specs. Extends the real Playwright `page`/`context`/`browser` fixtures with env, api and pages. */
 export const test = base.extend<UiFixtures>({
   // See fixtures/api.ts -- makeEnv() is already cached per worker process internally.
-  env: async ({}, use) => use(makeEnv()),
+  env: async ({}, use) => {
+    await use(makeEnv());
+  },
+
+  // Fresh APIRequestContext per test; disposed after so nothing leaks between tests.
   apiContext: async ({ env }, use) => {
     const ctx = await makeApiContext(env);
     await use(ctx);
     await ctx.dispose();
   },
-  api: async ({ apiContext, env }, use) => use(makeApiFactory(apiContext, env)),
-  pages: async ({ page, env }, use) => use(makePageFactory(page, env)),
+
+  // Wraps apiContext in typed API clients (api.users, api.brands, ...).
+  api: async ({ apiContext, env }, use) => {
+    await use(makeApiFactory(apiContext, env));
+  },
+
+  // Wraps page in typed page objects (pages.login, pages.home, ...).
+  pages: async ({ page, env }, use) => {
+    await use(makePageFactory(page, env));
+  },
 });
 export { expect };
