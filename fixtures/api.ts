@@ -20,12 +20,20 @@ export const test = base.extend<ApiFixtures>({
   // makeEnv() -> resolveEnv() caches internally per process, so this only resolves once per worker
   // regardless of Playwright fixture scope; kept test-scoped (default) to sidestep the extra typing
   // ceremony custom worker-scoped fixtures require.
-  env: async ({}, use) => use(makeEnv()),
+  env: async ({}, use) => {
+    await use(makeEnv());
+  },
+
+  // Fresh APIRequestContext per test; disposed after so nothing leaks between tests.
   apiContext: async ({ env }, use) => {
     const ctx = await makeApiContext(env);
     await use(ctx);
     await ctx.dispose();
   },
-  api: async ({ apiContext, env }, use) => use(makeApiFactory(apiContext, env)),
+
+  // Wraps apiContext in typed API clients (api.users, api.brands, ...).
+  api: async ({ apiContext, env }, use) => {
+    await use(makeApiFactory(apiContext, env));
+  },
 });
 export { expect };
