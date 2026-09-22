@@ -1,0 +1,10 @@
+node_modules
+.git
+.idea
+.env
+.env.example
+reports
+FEEDBACK.md
+toFix.md
+README.md
+LICENSE
