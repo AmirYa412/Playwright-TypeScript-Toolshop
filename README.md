@@ -17,6 +17,7 @@ This is a framework showcase — the goal is a clean, reusable architecture rath
 - [Tech Stack](#-tech-stack)
 - [Quick Start](#-quick-start)
 - [Running Tests](#-running-tests)
+- [Running in Docker](#-running-in-docker)
 - [Framework Features](#-framework-features)
 - [Project Structure](#-project-structure)
 - [Writing Tests](#-writing-tests)
@@ -108,6 +109,27 @@ npm run lint        # eslint .
 ```
 
 Tests are tagged and routed to a project by `playwright.config.ts` (`@api` → browserless project, `@ui` → Chromium project) — the tag is what determines which project a spec runs under, not its folder alone.
+
+---
+
+## 🐳 Running in Docker
+
+The `Dockerfile` is pinned to `mcr.microsoft.com/playwright:v1.62.1-noble` — the exact `@playwright/test` version in `package-lock.json` — so no local browser install is needed. Credentials are passed at `docker run` time via `--env-file`; they're never baked into the image (`.env` is excluded by `.dockerignore`).
+
+```bash
+docker build -t playwright-toolshop .
+
+# Full suite (api + ui) -- the default CMD
+docker run --rm --init --ipc=host --env-file .env playwright-toolshop
+
+# API only -- no browser needed, so --ipc=host isn't required
+docker run --rm --init --env-file .env playwright-toolshop npx playwright test --project=api
+
+# UI only
+docker run --rm --init --ipc=host --env-file .env playwright-toolshop npx playwright test --project=ui
+```
+
+`--ipc=host` is required whenever Chromium runs — without it the browser can run out of shared memory and crash. `--init` avoids zombie processes from PID 1. The image runs as the base image's non-root `pwuser`.
 
 ---
 
